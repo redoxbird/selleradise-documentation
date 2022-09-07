@@ -1,44 +1,29 @@
 import '../styles/globals.css';
 
+import { clsx } from 'clsx';
 import { nth, startCase } from 'lodash-es';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
-
-const routes: any = [
-  {
-    href: "/getting-started",
-    children: [
-      {
-        href: "/getting-started/requirements",
-      },
-      {
-        href: "/getting-started/theme-installation",
-        children: [
-          {
-            href: "/getting-started/setup-homepage",
-          },
-        ],
-      },
-      {
-        href: "/getting-started/plugins-installation",
-      },
-      {
-        href: "/getting-started/import-demo-content",
-      },
-    ],
-  },
-];
+import Image from '~/components/Image';
+import { routes } from '~/utils/global';
 
 function MyApp({ Component, pageProps }) {
   return (
     <>
       <div className="flex justify-start items-stretch">
-        <nav className="w-72 py-16 pr-10 pl-6 border-r-2 border-gray-100 h-screen fixed top-0 bottom-0 bg-white">
-          <Links routes={routes} />
+        <nav className="w-72 pt-10 pr-10 pb-16 pl-6 border-r-2 border-gray-100 h-screen fixed top-0 bottom-0 bg-white">
+          <a href="https://selleradise.com">
+            <Image
+              className="bg-transparent w-full px-6 mx-auto mb-10"
+              src="/img/logo.png"
+            />
+          </a>
+
+          <Links routes={routes} level={0} />
         </nav>
 
-        <main className="p-20 w-5/6 prose max-w-none pl-80">
+        <main className="p-20 w-full prose max-w-none pl-80">
           <Component {...pageProps} />
         </main>
       </div>
@@ -46,20 +31,27 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
-const Links = ({ routes }: any) => {
+export const Links = ({ routes, level }: any) => {
   return (
-    <ul className="flex flex-col justify-start items-start gap-4 pl-4 mt-4">
+    <ul
+      className={clsx([
+        "flex flex-col justify-start items-start gap-4 pl-4 mt-4",
+        level > 0 && "border-l-2 border-gray-100",
+      ])}
+    >
       {routes.map((route: any) => {
         const name = route.href.split("/");
         return (
-          <li>
+          <li key={`${route.href}-${level}`}>
             <NavLink
               href={route.href}
-              name={startCase(nth(name, -1))}
-              isParent={route.children}
+              name={route.name || startCase(nth(name, -1))}
+              isParent={level <= 0}
             />
 
-            {route.children && <Links routes={route.children} />}
+            {route.children && (
+              <Links routes={route.children} level={level + 1} />
+            )}
           </li>
         );
       })}
@@ -74,10 +66,8 @@ const NavLink = ({ href, name, isParent }: any) => {
     <Link href={href}>
       <a
         className={`${
-          router?.asPath === href
-            ? "text-gray-900 underline font-semibold"
-            : "text-gray-600"
-        } ${isParent && "text-gray-900"}`}
+          router?.asPath === href ? "text-gray-900 underline" : "text-gray-600"
+        } ${isParent && "font-semibold"}`}
       >
         {name}
       </a>
