@@ -28,6 +28,7 @@ const Section = ({ image, title = null, number, tags = [] }) => {
                       " text-white text-xs rounded-full px-3 py-1 font-semibold",
                       colorsByIndex.get(index)
                     )}
+                    key={index}
                   >
                     {tag}
                   </li>
