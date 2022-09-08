@@ -27,3 +27,25 @@ body {
   margin: 0;
   padding: 0;
 }
+
+/* Track */
+.scrollbar::-webkit-scrollbar {
+  @apply w-1;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+}
+
+/* Handle */
+.scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-transparent;
+}
+
+.scrollbar:hover::-webkit-scrollbar-thumb {
+  @apply bg-gray-200;
+}
+
+/* Handle on hover */
+.scrollbar::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-500;
+}

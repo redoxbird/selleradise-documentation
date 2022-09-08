@@ -12,7 +12,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <div className="flex justify-start items-stretch">
-        <nav className="w-72 pt-10 pr-10 pb-16 pl-6 border-r-2 border-gray-100 h-screen fixed top-0 bottom-0 bg-white">
+        <nav className="w-72 pt-10 pr-10 pb-16 pl-6 border-r-2 border-gray-100 h-screen fixed top-0 bottom-0 bg-white overflow-y-scroll scrollbar">
           <a href="https://selleradise.com">
             <Image
               className="bg-transparent w-full px-6 mx-auto mb-10"

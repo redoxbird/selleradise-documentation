@@ -52,6 +52,30 @@ export const routes: any = [
       {
         href: "/sections/product-cards",
       },
+      {
+        href: "/sections/sale-countdown",
+      },
+      {
+        href: "/sections/call-to-action",
+      },
+      {
+        href: "/sections/incentives",
+      },
+      {
+        href: "/sections/features",
+      },
+      {
+        href: "/sections/testimonial",
+      },
+      {
+        href: "/sections/faq",
+      },
+      {
+        href: "/sections/post-cards",
+      },
+      {
+        href: "/sections/footers",
+      },
     ],
   },
   {
