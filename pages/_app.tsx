@@ -1,5 +1,6 @@
 import '../styles/globals.css';
 
+import { useToggle } from 'ahooks';
 import { clsx } from 'clsx';
 import { nth, startCase } from 'lodash-es';
 import Link from 'next/link';
@@ -9,10 +10,16 @@ import Image from '~/components/Image';
 import { routes } from '~/utils/global';
 
 function MyApp({ Component, pageProps }) {
+  const [sidebar, toggleSidebar] = useToggle(true);
   return (
     <>
       <div className="flex justify-start items-stretch">
-        <nav className="w-72 pt-10 pr-10 pb-16 pl-6 border-r-2 border-gray-100 h-screen fixed top-0 bottom-0 bg-white overflow-y-scroll scrollbar">
+        <nav
+          className={clsx(
+            "w-72 pt-10 pr-10 pb-16 pl-6 border-r-2 border-gray-100 h-screen fixed top-0 bottom-0 bg-white overflow-y-scroll scrollbar",
+            [sidebar ? "block" : "hidden"]
+          )}
+        >
           <a href="https://selleradise.com">
             <Image
               className="bg-transparent w-full px-6 mx-auto mb-10"
@@ -23,7 +30,15 @@ function MyApp({ Component, pageProps }) {
           <Links routes={routes} level={0} />
         </nav>
 
-        <main className="p-20 w-full prose max-w-none pl-80">
+        <main className="p-4 lg:p-20 w-full prose max-w-none lg:pl-80">
+          <div className="lg:hidden w-full flex justify-end items-center mb-8">
+            <button
+              className="bg-gray-100 px-3 py-1 border-2 border-gray-200 rounded-full text-sm font-semibold"
+              onClick={() => toggleSidebar.toggle()}
+            >
+              Toggle Sidebar
+            </button>
+          </div>
           <Component {...pageProps} />
         </main>
       </div>
