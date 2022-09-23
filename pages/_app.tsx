@@ -3,6 +3,7 @@ import '../styles/globals.css';
 import { useToggle } from 'ahooks';
 import { clsx } from 'clsx';
 import { nth, startCase } from 'lodash-es';
+import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -13,6 +14,14 @@ function MyApp({ Component, pageProps }) {
   const [sidebar, toggleSidebar] = useToggle(true);
   return (
     <>
+      <Head>
+        <title>Selleradise Documentation</title>
+        <meta
+          name="description"
+          content="Selleradise theme user guide/documentation"
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div className="flex justify-start items-stretch">
         <nav
           className={clsx(
